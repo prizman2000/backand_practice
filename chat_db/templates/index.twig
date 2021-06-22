@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat</title>
+</head>
+<body>
+
+<div class="profile">
+    <div class="profile-container">
+    {% if login %}
+        <h1 class="profile-container__title">
+            Привет, {{ user.name }}!
+        </h1>
+        <div class="profile-container__message">
+            Здесь могла бы быть ваша реклама, но сейчас здесь реклама Drom.ru
+        </div>
+    {% else %}
+        <h1 class="profile-container__title">
+            Авторизация
+        </h1>
+        <form id="auth">
+            <input class="profile-container__input" name="login" placeholder="Введите логин"/>
+            <input class="profile-container__input" name="password" placeholder="Введите пароль"/>
+            <button type="submit">Войти</button>
+        </form>
+    {% endif %}
+    </div>
+</div>
+
+<div class="messages">
+    {% if login %}
+        <div class="messages-container">
+            {% for message in messages %}
+                <div class="messages-container-message">
+                    <div class="messages-container-message__author">{{ message.author }}</div>
+                    <div class="messages-container-message__text">{{ message.text }}</div>
+                    <div class="messages-container-message__date">{{ message.date }}</div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="messages-create">
+            <input class="messages-create__input" type="text" placeholder="Введите сообщение"/>
+            <button class="messages-create__send">Отправить</button>
+        </div>
+    {% endif %}
+</div>
+<script src="/scripts/index.js"></script>
+</body>
+</html>

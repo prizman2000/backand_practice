@@ -1,0 +1,6 @@
+{
+    "name": "slavka/project-twig",
+    "require": {
+        "twig/twig": "^3.3"
+    }
+}
