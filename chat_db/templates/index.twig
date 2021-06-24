@@ -11,9 +11,9 @@
 
 <div class="profile">
     <div class="profile-container">
-    {% if login %}
+    {% if authorized %}
         <h1 class="profile-container__title">
-            Привет, {{ user.name }}!
+            Привет, {{ user.login }}!
         </h1>
         <div class="profile-container__message">
             Здесь могла бы быть ваша реклама, но сейчас здесь реклама Drom.ru
@@ -22,6 +22,12 @@
         <h1 class="profile-container__title">
             Авторизация
         </h1>
+        {% if err %}
+            <h3 class="error" style="color: red">Неверно введен логин или пароль</h3>
+        {% else %}
+            <h3 class="auth_title">Введите логин и пароль для авторизации</h3>
+        {% endif %}
+
         <form id="auth">
             <input class="profile-container__input" name="login" placeholder="Введите логин"/>
             <input class="profile-container__input" name="password" placeholder="Введите пароль"/>
@@ -32,7 +38,7 @@
 </div>
 
 <div class="messages">
-    {% if login %}
+    {% if authorized %}
         <div class="messages-container">
             {% for message in messages %}
                 <div class="messages-container-message">
@@ -43,8 +49,12 @@
             {% endfor %}
         </div>
         <div class="messages-create">
-            <input class="messages-create__input" type="text" placeholder="Введите сообщение"/>
-            <button class="messages-create__send">Отправить</button>
+            <form>
+                <input name="login" value={{ user.login }}>
+                <input name="password" value={{ user.password }}>
+                <input class="messages-create__input" name="message" type="text" placeholder="Введите сообщение"/>
+                <button class="messages-create__send">Отправить</button>
+            </form>
         </div>
     {% endif %}
 </div>
